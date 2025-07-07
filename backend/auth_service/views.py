@@ -4,7 +4,7 @@ from rest_framework import status
 #from django.contrib.auth.models import User
 from .models import CustomUser as User
 from rest_framework.permissions import AllowAny, IsAuthenticated
-
+from .permissions import IsOrgAdmin, IsLearner
 class RegisterView(APIView):
     permission_classes = [AllowAny]
 
@@ -27,4 +27,15 @@ class ProtectedView(APIView):
             'id': user.id,
             'username': user.username,
             'email': user.email
-        })
+        }) 
+class OrgOnlyView(APIView):
+    permission_classes = [IsOrgAdmin]
+
+    def get(self, request):
+        return Response({"message": "Hello Org Admin!"})
+
+class LearnerOnlyView(APIView):
+    permission_classes = [IsLearner]
+
+    def get(self, request):
+        return Response({"message": "Hello Org Learner!"})
