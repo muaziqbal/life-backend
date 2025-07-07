@@ -2,9 +2,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .serializers import UserProfileSerializer
+from auth_service.permissions import IsSameTenant
 
 class UserProfileView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated and IsSameTenant]
 
     def get(self, request):
         serializer = UserProfileSerializer(request.user)
