@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'auth_service',
     'user_service',
     'notification_service',
+    'role_service',
 ]
 
 MIDDLEWARE = [
