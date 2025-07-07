@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+import firebase_admin
+from firebase_admin import credentials
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'auth_service',
     'user_service',
+    'notification_service',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +132,13 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = 'auth_service.CustomUser'
+
+cred = credentials.Certificate("firebase.json")
+firebase_admin.initialize_app(cred)
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'muaz.iqbal@devsinc.com'
+EMAIL_HOST_PASSWORD = 'mpagtatixcqkodfu'
