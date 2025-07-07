@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'user_service',
     'notification_service',
     'role_service',
+    'audit_service',
 ]
 
 MIDDLEWARE = [
@@ -143,3 +144,6 @@ EMAIL_PORT = 465
 EMAIL_USE_SSL = True
 EMAIL_HOST_USER = 'muaz.iqbal@devsinc.com'
 EMAIL_HOST_PASSWORD = 'mpagtatixcqkodfu'
+
+MONGO_URI = "mongodb://localhost:27017/"
+MONGO_DB = "audit_logs"

@@ -5,6 +5,7 @@ from rest_framework import status
 from .models import CustomUser as User
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from .permissions import IsOrgAdmin, IsLearner
+from audit_service.utils import log_action
 class RegisterView(APIView):
     permission_classes = [AllowAny]
 
@@ -16,6 +17,7 @@ class RegisterView(APIView):
             return Response({'error': 'User already exists'}, status=status.HTTP_400_BAD_REQUEST)
 
         user = User.objects.create_user(username=username, password=password, full_name="John Smith", role="learner", tenant_id="school_123")
+        log_action(user.id, "register", {"username": user.username})
         return Response({'message': 'User created successfully'}, status=status.HTTP_201_CREATED)
 
 class ProtectedView(APIView):
