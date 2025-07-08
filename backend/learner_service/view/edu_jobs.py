@@ -3,9 +3,11 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from auth_service.models import CustomUser
 from auth_service.permissions import IsLearner
+from learner_service.models import EduJobSubmission
+from learner_service.serializers import EduJobSubmissionSerializer
 
 class EduJobDetailView(APIView):
-    permission_classes = [IsAuthenticated and IsLearner]
+    permission_classes = [IsAuthenticated, IsLearner]
 
     def get(self, request, job_id):
         user = request.user
@@ -26,3 +28,17 @@ class EduJobDetailView(APIView):
         }
 
         return Response(data)
+
+class SubmitEduJobView(APIView):
+    permission_classes = [IsAuthenticated, IsLearner]
+
+    def post(self, request, job_id):
+        data = request.data.copy()
+        #data['user'] = request.user.id
+        data['job_id'] = job_id
+        print(data)
+        serializer = EduJobSubmissionSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save(user = request.user)
+            return Response({"message": "Submission received!"}, status=201)
+        return Response(serializer.errors, status=400)
