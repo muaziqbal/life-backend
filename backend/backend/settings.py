@@ -43,9 +43,11 @@ INSTALLED_APPS = [
     'notification_service',
     'role_service',
     'audit_service',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -147,3 +149,9 @@ EMAIL_HOST_PASSWORD = 'mpagtatixcqkodfu'
 
 MONGO_URI = "mongodb://localhost:27017/"
 MONGO_DB = "audit_logs"
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
+
+CORS_ALLOW_CREDENTIALS = True

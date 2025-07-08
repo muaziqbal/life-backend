@@ -5,7 +5,7 @@ from .serializers import UserProfileSerializer
 from auth_service.permissions import IsSameTenant
 
 class UserProfileView(APIView):
-    permission_classes = [IsAuthenticated and IsSameTenant]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         serializer = UserProfileSerializer(request.user)
