@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'role_service',
     'audit_service',
     'corsheaders',
+    'learner_service',
 ]
 
 MIDDLEWARE = [

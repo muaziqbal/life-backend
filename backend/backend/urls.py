@@ -12,5 +12,5 @@ urlpatterns = [
     path('api/auth/', include('auth_service.urls')),  # include your app’s routes
     path('api/user/', include('user_service.urls')),  # include user service routes
     path('api/roles/', include('role_service.urls')),
-
+    path('api/learner/', include('learner_service.urls')),
 ]
